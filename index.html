@@ -40,6 +40,16 @@
             margin: 0 auto;
             padding: 0 24px;
         }
+
+        /* 强制所有主要区块容器居中，防止被外部样式影响 */
+        nav .container,
+        header .container,
+        section .container,
+        footer .container {
+            max-width: 1280px;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
         
         /* 导航栏样式 */
         nav {
@@ -341,6 +351,69 @@
             font-weight: bold;
         }
         
+        /* 赞助图片（全局） */
+        .sponsor-image-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px auto 30px;
+        }
+        
+        .sponsor-image-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(26, 115, 232, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            max-width: 500px;
+            flex: 1 1 0;
+        }
+        
+        .sponsor-image-wrapper:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sponsor-image-small {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #111;
+        }
+        
+        .sponsor-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .sponsor-image-wrapper:hover .sponsor-image-overlay {
+            opacity: 1;
+        }
+        
+        /* 赞助行布局：左图右名单 */
+        .sponsor-row {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            gap: 24px;
+            margin: 40px auto;
+            max-width: 1100px;
+        }
+        .sponsor-list-card { margin-left: 0; flex: 1 1 0; max-width: 500px; min-width: 0; }
+
         /* 高亮框样式 */
         .highlight-box {
             background-color: var(--card-bg);
@@ -713,20 +786,129 @@
                 border: 1px solid var(--border-color);
             }
             
-            .sponsor-image {
-                margin: 30px 0;
-                text-align: center;
-                max-width: 600px;
-                margin-left: auto;
-                margin-right: auto;
+            /* 小屏覆盖尺寸更小 */
+            .sponsor-image-container { margin: 20px auto 30px; }
+            .sponsor-row { flex-direction: column; align-items: center; gap: 16px; margin: 24px auto; }
+            .sponsor-image-wrapper { max-width: 360px; }
+            .sponsor-list-card { width: 100%; max-width: 700px; }
+            
+            .sponsor-image-overlay i {
+                color: white;
+                font-size: 24px;
             }
             
-            .sponsor-img {
-                width: 300px;
-                height: auto;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-                border: 1px solid var(--border-color);
+            .sponsor-list-container {
+                margin: 40px auto;
+                max-width: 700px;
+                text-align: center;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 249, 250, 0.95));
+                border-radius: 16px;
+                box-shadow: 0 8px 30px rgba(26, 115, 232, 0.12);
+                padding: 30px;
+                border: 1px solid rgba(26, 115, 232, 0.15);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .sponsor-list-container:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: linear-gradient(90deg, #1a73e8, #4285f4, #34a853);
+            }
+            
+            .sponsor-list-container h3 {
+                font-size: 2rem;
+                color: #1a73e8;
+                margin-bottom: 25px;
+                position: relative;
+                display: inline-block;
+                font-weight: 700;
+            }
+            
+            .sponsor-list-container h3:after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80px;
+                height: 3px;
+                background: linear-gradient(90deg, #1a73e8, #4285f4);
+                border-radius: 2px;
+            }
+            
+            .sponsor-list {
+                background: rgba(255, 255, 255, 0.7);
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                padding: 25px;
+                margin-bottom: 20px;
+                border: 1px solid rgba(26, 115, 232, 0.1);
+            }
+            
+            .sponsor-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 18px 25px;
+                border-radius: 10px;
+                background: linear-gradient(135deg, rgba(26, 115, 232, 0.06), rgba(66, 133, 244, 0.06));
+                border-left: 4px solid #1a73e8;
+                transition: all 0.3s ease;
+                margin-bottom: 15px;
+            }
+            
+            .sponsor-item:last-child {
+                margin-bottom: 0;
+            }
+            
+            .sponsor-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(26, 115, 232, 0.2);
+                background: linear-gradient(135deg, rgba(26, 115, 232, 0.1), rgba(66, 133, 244, 0.1));
+            }
+            
+            .sponsor-name {
+                font-size: 1.3rem;
+                font-weight: 600;
+                color: #333;
+                display: flex;
+                align-items: center;
+            }
+            
+            .sponsor-name i {
+                margin-right: 12px;
+                color: #1a73e8;
+                font-size: 1.4rem;
+            }
+            
+            .sponsor-amount {
+                font-size: 1.2rem;
+                font-weight: 600;
+                color: white;
+                background: linear-gradient(135deg, #1a73e8, #4285f4);
+                padding: 8px 16px;
+                border-radius: 30px;
+                display: flex;
+                align-items: center;
+                box-shadow: 0 4px 10px rgba(26, 115, 232, 0.3);
+            }
+            
+            .sponsor-amount i {
+                margin-right: 8px;
+                font-size: 1.2rem;
+            }
+            
+            .sponsor-note {
+                font-size: 1rem;
+                color: #555;
+                margin-top: 15px;
+                font-style: italic;
+                line-height: 1.5;
             }
             
             .sponsor-note-container {
@@ -1002,6 +1184,8 @@
                     <div class="keyword">导入</div>
                 </div>
             </div>
+            
+            
             
             <div class="card-container">
                 <div class="card">
@@ -1365,11 +1549,67 @@
             
             <div class="highlight-box">
                 <h3>支持中文编程的发展</h3>
-                <p>空灵语言是一个完全开源的项目，致力于为中文开发者提供最自然、最直观的编程体验。您的赞助将直接用于项目开发、服务器维护和社区活动。</p>
+                <p>空灵语言是一个完全开源的项目，我们坚信中文编程的力量。您的赞助完全出于自愿，无论金额大小，都是对中文编程发展的宝贵支持。每一份心意都将用于项目的持续开发、服务器维护和社区活动建设。感谢您对空灵语言的关注与支持！</p>
             </div>
             
-            <div class="sponsor-image">
-                <img src="zhanzhu.jpg" alt="赞助信息" class="sponsor-img">
+            <div class="sponsor-row">
+                <div class="sponsor-image-wrapper">
+                    <img src="zhanzhu.jpg" alt="赞助信息" class="sponsor-image-small">
+                    <div class="sponsor-image-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <!-- 赞助名单（左图右名单） -->
+                <div class="sponsor-list-card" style="max-width: 700px; text-align: center; background: #ffffff; border-radius: 16px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); padding: 30px; border: 1px solid #e0e0e0;">
+                <h3 style="font-size: 2rem; color: #1a73e8; margin-bottom: 25px; position: relative; display: inline-block; font-weight: 700;">
+                    自由赞助名单
+                </h3>
+                <div style="background: #f8f9fa; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); padding: 25px; margin-bottom: 20px; border: 1px solid #e0e0e0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 25px; border-radius: 10px; background: #f1f8ff; border-left: 4px solid #1a73e8; margin-bottom: 15px;">
+                        <span style="font-size: 1.3rem; font-weight: 600; color: #333; display: flex; align-items: center;">
+                            <i class="fas fa-user" style="margin-right: 12px; color: #1a73e8; font-size: 1.4rem;"></i>
+                            月阁星灵
+                        </span>
+                        <span style="font-size: 1.2rem; font-weight: 600; color: white; background: #1a73e8; padding: 8px 16px; border-radius: 30px; display: flex; align-items: center; box-shadow: 0 4px 10px rgba(26, 115, 232, 0.3);">
+                            <i class="fas fa-money-bill-wave" style="margin-right: 8px; font-size: 1.2rem;"></i>
+                            100元
+                        </span>
+                    </div>
+                </div>
+                <p style="font-size: 1.1rem; color: #333; margin-top: 20px; font-weight: 500; line-height: 1.6;">
+                    您的慷慨支持如同星光般照亮了空灵语言的发展之路！每一位赞助者都是我们前进路上最珍贵的伙伴，您的信任与鼓励是我们不断创新、持续优化的最大动力。
+                </p>
+                
+                <!-- 赞助者权益 -->
+                <div style="margin-top: 25px; text-align: left; background: #f8f9fa; border-radius: 12px; padding: 20px; border: 1px solid #e0e0e0;">
+                    <h4 style="font-size: 1.3rem; color: #1a73e8; margin-bottom: 15px; font-weight: 600; display: flex; align-items: center;">
+                        <i class="fas fa-crown" style="margin-right: 10px; color: #fbbc04;"></i>
+                        赞助者专属权益
+                    </h4>
+                    <ul style="list-style-type: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: flex-start;">
+                            <i class="fas fa-check-circle" style="color: #34a853; margin-right: 10px; margin-top: 3px;"></i>
+                            <span style="font-size: 1rem; color: #333;">优先参与语言开发建设，与核心开发团队直接交流</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: flex-start;">
+                            <i class="fas fa-check-circle" style="color: #34a853; margin-right: 10px; margin-top: 3px;"></i>
+                            <span style="font-size: 1rem; color: #333;">语法设计提议权，您的建议将被优先考虑和评估</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: flex-start;">
+                            <i class="fas fa-check-circle" style="color: #34a853; margin-right: 10px; margin-top: 3px;"></i>
+                            <span style="font-size: 1rem; color: #333;">关键字设计提议权，参与语言核心元素的设计讨论</span>
+                        </li>
+                        <li style="display: flex; align-items: flex-start;">
+                            <i class="fas fa-check-circle" style="color: #34a853; margin-right: 10px; margin-top: 3px;"></i>
+                            <span style="font-size: 1rem; color: #333;">封装指定库特权，可提出特定功能库的开发需求</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 12px; text-align: right; color: #777; font-size: 0.95rem;">
+                    灵创-空灵语言开发团队
+                </div>
+                </div>
             </div>
             
             <div class="sponsor-note-container">
@@ -1377,10 +1617,7 @@
                     <div class="sponsor-note-icon">
                         <i class="fas fa-heart"></i>
                     </div>
-                    <div class="sponsor-note-content">
-                        <h3>赞助说明</h3>
-                        <p>空灵语言是一个完全开源的项目，我们坚信中文编程的力量。您的赞助完全出于自愿，无论金额大小，都是对中文编程发展的宝贵支持。每一份心意都将用于项目的持续开发、服务器维护和社区活动建设。感谢您对空灵语言的关注与支持！</p>
-                    </div>
+              
                     <div class="sponsor-note-decoration">
                         <div class="decoration-circle circle-1"></div>
                         <div class="decoration-circle circle-2"></div>
