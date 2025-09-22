@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>空灵语言 - 中文编程语言</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>空</text></svg>">
+    <link rel="icon" href="KL.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -120,16 +120,42 @@
             z-index: 1;
         }
         
-        h1 {
-            font-size: 4.5rem;
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .site-logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 20px;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+        
+        .logo-container h1 {
+            margin: 0;
+            font-size: 3.5rem;
             font-weight: 800;
-            margin-bottom: 24px;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.02em;
             line-height: 1.1;
         }
+        
+        h1:not(.logo-container h1) {
+    font-size: 4.5rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
         
         .tagline {
             font-size: 1.75rem;
@@ -588,6 +614,18 @@
             line-height: 1.6;
         }
         
+        /* 版本信息样式 */
+        .version-info {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
         /* 响应式设计 */
         @media (max-width: 768px) {
             h1 {
@@ -671,7 +709,7 @@
                 <li><a href="#about" class="active"><i class="fas fa-info-circle"></i> 关于空灵</a></li>
                 <li><a href="#ide"><i class="fas fa-code"></i> 集成开发环境</a></li>
                 <li><a href="#compiler"><i class="fas fa-cogs"></i> 编译器</a></li>
-                <li><a href="#opensource"><i class="fab fa-github"></i> 开源</a></li>
+                <li><a href="#opensource"><i class="fab fa-github"></i> 开源下载</a></li>
                 <li><a href="#features"><i class="fas fa-star"></i> 特性</a></li>
                 <li><a href="#download"><i class="fas fa-download"></i> 下载</a></li>
             </ul>
@@ -681,7 +719,10 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <h1>空灵语言</h1>
+                <div class="logo-container">
+                    <img src="KL.png" alt="空灵语言图标" class="site-logo">
+                    <h1>空灵语言</h1>
+                </div>
                 <p class="tagline">专为中文开发者设计的现代化编程语言，优雅简洁，高效强大</p>
                 <div class="header-buttons">
                     <a href="#download" class="btn btn-primary"><i class="fas fa-download"></i> 立即下载</a>
@@ -924,6 +965,7 @@
             <div class="card">
                 <div class="card-icon"><i class="fas fa-code"></i></div>
                 <h3>集成开发环境</h3>
+                <p class="version-info">版本 0.13</p>
                 <p>空灵语言IDE完全开源，遵循MIT许可证，提供直观的代码编辑、调试和项目管理功能。</p>
                 <ul class="feature-list">
                     <li>MIT开源许可证</li>
@@ -931,10 +973,12 @@
                     <li>强大的调试功能</li>
                     <li>完整的项目管理</li>
                 </ul>
+                <a href="#" class="btn btn-primary"><i class="fas fa-download"></i> 下载IDE源码</a>
             </div>
             <div class="card">
                 <div class="card-icon"><i class="fas fa-cogs"></i></div>
                 <h3>编译器</h3>
+                <p class="version-info">版本 0.20</p>
                 <p>空灵编译器完全开源，遵循Apache 2.0许可证，实现高效的中文代码编译和优化。</p>
                 <ul class="feature-list">
                     <li>Apache 2.0开源许可证</li>
@@ -942,6 +986,7 @@
                     <li>智能代码优化</li>
                     <li>多平台支持</li>
                 </ul>
+                <a href="#" class="btn btn-primary"><i class="fas fa-download"></i> 下载编译器源码</a>
             </div>
             <div class="card">
                 <div class="card-icon"><i class="fas fa-users"></i></div>
